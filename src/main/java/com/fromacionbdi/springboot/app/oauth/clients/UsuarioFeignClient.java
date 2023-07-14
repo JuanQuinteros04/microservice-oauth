@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 public interface UsuarioFeignClient {
 
     @GetMapping("/username/{username}")
-    Usuario findByUsername(@RequestParam String username);
+    Usuario userForName(@RequestParam String username);
 
-    @PutMapping("/usuarios/{id}")
-    public Usuario update(@RequestBody Usuario usuario, @PathVariable Long id);
+    @PutMapping("/modificar/{id}")
+    Usuario editar(@RequestBody Usuario usuario, @PathVariable Long id);
 }

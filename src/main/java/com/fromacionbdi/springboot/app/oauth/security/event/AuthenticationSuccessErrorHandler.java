@@ -1,8 +1,6 @@
 package com.fromacionbdi.springboot.app.oauth.security.event;
 
-import com.formacionbdi.springboot.app.commons.usuarios.model.entity.Usuario;
-import com.fromacionbdi.springboot.app.oauth.services.IUsuarioService;
-import feign.FeignException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,17 +11,25 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
 
+import com.formacionbdi.springboot.app.commons.usuarios.model.entity.Usuario;
+import com.fromacionbdi.springboot.app.oauth.services.IUsuarioService;
+
+import feign.FeignException;
+
+
 @Component
 public class AuthenticationSuccessErrorHandler implements AuthenticationEventPublisher {
 
-    private Logger log = LoggerFactory.getLogger(AuthenticationSuccessErrorHandler.class);
 
     @Autowired
     private IUsuarioService usuarioService;
 
+    private Logger log = LoggerFactory.getLogger(AuthenticationSuccessErrorHandler.class);
+
+
     @Override
     public void publishAuthenticationSuccess(Authentication authentication) {
-        // if(authentication.getName().equalsIgnoreCase("frontendapp")) {
+//         if(authentication.getName().equalsIgnoreCase("frontendapp")) {
         if(authentication.getDetails() instanceof WebAuthenticationDetails) {
             return;
         }

@@ -1,15 +1,17 @@
 package com.fromacionbdi.springboot.app.oauth.clients;
 
-import com.formacionbdi.springboot.app.commons.usuarios.model.entity.Usuario;
+import com.fromacionbdi.springboot.app.oauth.model.User;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@FeignClient(name = "servicio-usuarios")
+@FeignClient(name = "service-users")
 public interface UsuarioFeignClient {
 
-    @GetMapping("/username/{username}")
-    Usuario userForName(@RequestParam String username);
+    @GetMapping("/users/username/{username}")
+    ResponseEntity<User> getByUsername(@PathVariable("username") String username);
 
-    @PutMapping("/modificar/{id}")
-    Usuario editar(@RequestBody Usuario usuario, @PathVariable Long id);
+    @PutMapping("/users/{id}")
+    User changeStateUser(@RequestBody User user, @PathVariable("id") Long id);
+
 }
